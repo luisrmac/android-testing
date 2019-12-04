@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -74,7 +75,10 @@ public class MathPresenterTest {
 
     @Test
     public void divideShouldThrowException() {
-
+        when(calculator.divide(anyInt(), anyInt()))
+                .thenThrow(new IllegalArgumentException());
+        presenter.divide(2,0);
+        verify(view).showError(anyString());
     }
 
 }
